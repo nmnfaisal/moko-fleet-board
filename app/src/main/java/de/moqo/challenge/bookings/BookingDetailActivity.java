@@ -1,0 +1,102 @@
+package de.moqo.challenge.bookings;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+
+import de.moqo.challenge.R;
+import de.moqo.challenge.core.BaseActivity;
+import de.moqo.challenge.databinding.ActivityBookingDetailBinding;
+import de.moqo.challenge.feature.cancellation.CancelBookingSheet;
+import de.moqo.challenge.sdk.BasicCallback;
+import de.moqo.challenge.sdk.Booking;
+import de.moqo.challenge.sdk.FleetApi;
+import de.moqo.challenge.sdk.FleetError;
+import de.moqo.challenge.sdk.TripTicket;
+
+public class BookingDetailActivity extends BaseActivity {
+
+    public static final String EXTRA_BOOKING_ID = "booking_id";
+
+    private ActivityBookingDetailBinding binding;
+    @Nullable
+    private Booking booking;
+
+    @Override
+    protected boolean isFullscreenContent() {
+        return true;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_detail);
+
+        binding.startTrip.setOnClickListener(view -> startTrip());
+        binding.cancelBooking.setOnClickListener(view -> showCancelSheet());
+        binding.close.setOnClickListener(view -> finish());
+
+        String bookingId = getIntent().getStringExtra(EXTRA_BOOKING_ID);
+        loadBooking(bookingId);
+    }
+
+    private void loadBooking(String bookingId) {
+        showGlobalProgress();
+        FleetApi.with(this).booking(this, bookingId, new BasicCallback<Booking>() {
+            @Override
+            public void onSuccess(@NonNull Booking result) {
+                dismissGlobalProgress();
+                booking = result;
+                render(result);
+            }
+
+            @Override
+            public void onFailure(@NonNull FleetError error) {
+                dismissGlobalProgress();
+                Toast.makeText(BookingDetailActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
+    }
+
+    private void render(Booking booking) {
+        binding.vehicleName.setText(booking.getVehicle().getName());
+        binding.plate.setText(booking.getVehicle().getPlate());
+        binding.timeRange.setText(BookingFormatter.timeRange(booking));
+        binding.provider.setText(BookingFormatter.providerLine(this, booking));
+        binding.startTrip.setEnabled(true);
+    }
+
+    private void startTrip() {
+        if (booking == null) {
+            return;
+        }
+        showGlobalProgress();
+        FleetApi.with(this).startTrip(this, booking.getId(), new BasicCallback<TripTicket>() {
+            @Override
+            public void onSuccess(@NonNull TripTicket result) {
+                dismissGlobalProgress();
+                binding.unlockCode.setText(getString(R.string.detail_unlock_code, result.getUnlockCode()));
+                binding.unlockCode.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailure(@NonNull FleetError error) {
+                dismissGlobalProgress();
+                Toast.makeText(BookingDetailActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void showCancelSheet() {
+        if (booking == null) {
+            return;
+        }
+        CancelBookingSheet.newInstance(booking.getVehicle().getName())
+                .show(getSupportFragmentManager(), "cancel_booking");
+    }
+}

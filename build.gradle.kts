@@ -1,0 +1,7 @@
+// Versions mirror the production MOQO Android app.
+// AGP 9 brings its own Kotlin plugin, so kotlin("android") must not be applied on top of it.
+plugins {
+    id("com.android.application") version "9.2.0" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10" apply false
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10" apply false
+}

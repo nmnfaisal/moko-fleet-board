@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#2A789C</color>
+    <color name="background">#F3F6F8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="divider">#E1E9ED</color>
+    <color name="text_dark">#13252E</color>
+    <color name="text_muted">#5A6B75</color>
+    <color name="status_active">#2E9E5B</color>
+    <color name="status_upcoming">#E0A32E</color>
+    <color name="status_neutral">#B4C0C7</color>
+    <color name="scrim">#66000000</color>
+    <color name="ic_launcher_background">#2A789C</color>
+</resources>

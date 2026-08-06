@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MOQO Fleet Board</string>
+
+    <string name="list_title">Your bookings</string>
+    <string name="list_footer_hint">Data is mocked from a bundled asset</string>
+    <string name="list_load_failed">Could not load bookings: %1$s</string>
+
+    <string name="flag_needs_cleaning">Needs cleaning</string>
+    <string name="flag_charging">Charging</string>
+    <string name="flag_damage_reported">Damage reported</string>
+
+    <string name="detail_close">Close</string>
+    <string name="detail_start_trip">Start trip</string>
+    <string name="detail_cancel_booking">Cancel booking</string>
+    <string name="detail_provided_by">Provided by %1$s</string>
+    <string name="detail_unlock_code">Unlock code %1$s</string>
+
+    <string name="cancel_sheet_title">Cancel this booking?</string>
+    <string name="cancel_sheet_body">Your booking for %1$s will be released and the vehicle becomes available to other drivers.</string>
+    <string name="cancel_sheet_confirm">Cancel booking</string>
+    <string name="cancel_sheet_keep">Keep booking</string>
+    <string name="cancel_sheet_done">Booking cancelled</string>
+</resources>

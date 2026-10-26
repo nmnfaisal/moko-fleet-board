@@ -173,7 +173,7 @@ a software nav bar the Start Trip button sits behind the system bar.
 
 *(Fill in during implementation — one bullet per decision or surprise)*
 
-- 
+- Bug 4: providerLine null-safe with empty-string sentinel; detail screen hides provider view when empty; no SDK change needed.
 - 
 - 
 - 

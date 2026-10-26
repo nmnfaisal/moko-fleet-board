@@ -65,6 +65,19 @@
                 tools:text="3 Aug, 09:00 to 11:30" />
 
             <TextView
+                android:id="@+id/providerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/subtitle"
+                tools:text="MOQO Aachen" />
+
+            <TextView
                 android:id="@+id/flagChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +89,7 @@
                 android:textSize="12sp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/title"
-                app:layout_constraintTop_toBottomOf="@id/subtitle"
+                app:layout_constraintTop_toBottomOf="@id/providerName"
                 tools:text="Needs cleaning" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,13 @@ public class BookingItemViewModel {
                     ColorStateList.valueOf(ContextCompat.getColor(binding.getRoot().getContext(), R.color.status_neutral)));
         }
 
+        if (booking.getProvider() != null) {
+            binding.providerName.setText(booking.getProvider().getName());
+            binding.providerName.setVisibility(View.VISIBLE);
+        } else {
+            binding.providerName.setVisibility(View.GONE);
+        }
+
         String flag = booking.getFlag();
         if (flag != null) {
             binding.flagChip.setText(BookingFormatter.flagLabel(binding.getRoot().getContext(), flag));

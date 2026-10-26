@@ -177,6 +177,7 @@ a software nav bar the Start Trip button sits behind the system bar.
 - Bug 1: reset statusDot tint to neutral and flagChip to GONE on every bind; kept dot visible for terminal statuses (neutral grey, no layout shift).
 - Bug 3: 10 s timeout via Handler.postDelayed, button disabled on tap, cancelStartTrip() shared cleanup for timeout/failure/back. Initially tried OnBackPressedCallback for back-button escape but it didn't work — dialog intercepts back press before the callback fires. Switched to adding setGlobalProgressCancelable to BaseActivity (one protected method); dialog routes its own cancel to cancelStartTrip(). SDK untouched. Caught the back-button issue during manual testing.
 - Bug 2: listener approach on actions container, not eager read. Preserves existing padding on left/top/right, adds nav bar height to bottom. Returns insets unconsumed.
+- Point 5a: provider name below time range, 13sp muted text, hidden when null. Flag chip rechained to sit below provider line.
 
 - 
 - 

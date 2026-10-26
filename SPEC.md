@@ -175,7 +175,7 @@ a software nav bar the Start Trip button sits behind the system bar.
 
 - Bug 4: providerLine null-safe with empty-string sentinel; detail screen hides provider view when empty; no SDK change needed.
 - Bug 1: reset statusDot tint to neutral and flagChip to GONE on every bind; kept dot visible for terminal statuses (neutral grey, no layout shift).
-
+- Bug 3: 10 s timeout via Handler.postDelayed, button disabled on tap, cancelStartTrip() shared cleanup for timeout/failure/back. Initially tried OnBackPressedCallback for back-button escape but it didn't work — dialog intercepts back press before the callback fires. Switched to adding setGlobalProgressCancelable to BaseActivity (one protected method); dialog routes its own cancel to cancelStartTrip(). SDK untouched. Caught the back-button issue during manual testing.
 - 
 - 
 - 

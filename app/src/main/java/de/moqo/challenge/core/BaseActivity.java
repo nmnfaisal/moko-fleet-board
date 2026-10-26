@@ -1,6 +1,7 @@
 package de.moqo.challenge.core;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -113,6 +114,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         params.gravity = Gravity.CENTER;
         root.addView(spinner, params);
         return root;
+    }
+
+    protected void setGlobalProgressCancelable(DialogInterface.OnCancelListener listener) {
+        if (globalProgress != null) {
+            globalProgress.setCancelable(true);
+            globalProgress.setOnCancelListener(listener);
+        }
     }
 
     public void dismissGlobalProgress() {

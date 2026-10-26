@@ -1,6 +1,8 @@
 package de.moqo.challenge.bookings;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +27,9 @@ public class BookingDetailActivity extends BaseActivity {
     private ActivityBookingDetailBinding binding;
     @Nullable
     private Booking booking;
+
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable startTripTimeout;
 
     @Override
     protected boolean isFullscreenContent() {
@@ -77,10 +82,19 @@ public class BookingDetailActivity extends BaseActivity {
         if (booking == null) {
             return;
         }
+        binding.startTrip.setEnabled(false);
         showGlobalProgress();
+        setGlobalProgressCancelable(d -> cancelStartTrip());
+        startTripTimeout = () -> {
+            cancelStartTrip();
+            Toast.makeText(this, R.string.detail_start_trip_timeout, Toast.LENGTH_LONG).show();
+        };
+        handler.postDelayed(startTripTimeout, 10_000);
         FleetApi.with(this).startTrip(this, booking.getId(), new BasicCallback<TripTicket>() {
             @Override
             public void onSuccess(@NonNull TripTicket result) {
+                handler.removeCallbacks(startTripTimeout);
+                startTripTimeout = null;
                 dismissGlobalProgress();
                 binding.unlockCode.setText(getString(R.string.detail_unlock_code, result.getUnlockCode()));
                 binding.unlockCode.setVisibility(View.VISIBLE);
@@ -88,10 +102,23 @@ public class BookingDetailActivity extends BaseActivity {
 
             @Override
             public void onFailure(@NonNull FleetError error) {
-                dismissGlobalProgress();
+                cancelStartTrip();
                 Toast.makeText(BookingDetailActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void cancelStartTrip() {
+        handler.removeCallbacks(startTripTimeout);
+        startTripTimeout = null;
+        dismissGlobalProgress();
+        binding.startTrip.setEnabled(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacksAndMessages(null);
+        super.onDestroy();
     }
 
     private void showCancelSheet() {

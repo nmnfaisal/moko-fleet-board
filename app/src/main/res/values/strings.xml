@@ -14,6 +14,7 @@
     <string name="detail_cancel_booking">Cancel booking</string>
     <string name="detail_provided_by">Provided by %1$s</string>
     <string name="detail_unlock_code">Unlock code %1$s</string>
+    <string name="detail_start_trip_timeout">Could not start the trip. Please try again.</string>
 
     <string name="cancel_sheet_title">Cancel this booking?</string>
     <string name="cancel_sheet_body">Your booking for %1$s will be released and the vehicle becomes available to other drivers.</string>

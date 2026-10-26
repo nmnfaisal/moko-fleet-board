@@ -36,12 +36,17 @@ public class BookingItemViewModel {
             int color = status == BookingStatus.ACTIVE ? R.color.status_active : R.color.status_upcoming;
             binding.statusDot.setImageTintList(
                     ColorStateList.valueOf(ContextCompat.getColor(binding.getRoot().getContext(), color)));
+        } else {
+            binding.statusDot.setImageTintList(
+                    ColorStateList.valueOf(ContextCompat.getColor(binding.getRoot().getContext(), R.color.status_neutral)));
         }
 
         String flag = booking.getFlag();
         if (flag != null) {
             binding.flagChip.setText(BookingFormatter.flagLabel(binding.getRoot().getContext(), flag));
             binding.flagChip.setVisibility(View.VISIBLE);
+        } else {
+            binding.flagChip.setVisibility(View.GONE);
         }
     }
 }

@@ -21,18 +21,58 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filterChips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_horizontal"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/screenTitle"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCurrent"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/filter_current"
+                android:textColor="@color/chip_filter_text"
+                app:chipBackgroundColor="@color/chip_filter_background"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                app:checkedIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAll"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_all"
+                android:textColor="@color/chip_filter_text"
+                app:chipBackgroundColor="@color/chip_filter_background"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                app:checkedIconVisible="false" />
+
+        </com.google.android.material.chip.ChipGroup>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookings"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_small"
             android:clipToPadding="false"
             android:paddingHorizontal="@dimen/spacing_horizontal"
             android:paddingBottom="@dimen/spacing_medium"
             app:layout_constraintBottom_toTopOf="@id/footerHint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/screenTitle" />
+            app:layout_constraintTop_toBottomOf="@id/filterChips" />
 
         <ProgressBar
             android:id="@+id/progress"

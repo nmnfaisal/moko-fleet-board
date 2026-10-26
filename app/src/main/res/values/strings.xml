@@ -4,6 +4,8 @@
     <string name="list_title">Your bookings</string>
     <string name="list_footer_hint">Data is mocked from a bundled asset</string>
     <string name="list_load_failed">Could not load bookings: %1$s</string>
+    <string name="filter_current">Current</string>
+    <string name="filter_all">All</string>
 
     <string name="flag_needs_cleaning">Needs cleaning</string>
     <string name="flag_charging">Charging</string>

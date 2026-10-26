@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 
 import de.moqo.challenge.R;
@@ -44,6 +46,16 @@ public class BookingDetailActivity extends BaseActivity {
         binding.startTrip.setOnClickListener(view -> startTrip());
         binding.cancelBooking.setOnClickListener(view -> showCancelSheet());
         binding.close.setOnClickListener(view -> finish());
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.actions, (view, insets) -> {
+            int navBottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
+            view.setPadding(
+                    view.getPaddingLeft(),
+                    view.getPaddingTop(),
+                    view.getPaddingRight(),
+                    navBottom);
+            return insets;
+        });
 
         String bookingId = getIntent().getStringExtra(EXTRA_BOOKING_ID);
         loadBooking(bookingId);

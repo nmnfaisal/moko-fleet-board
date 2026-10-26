@@ -67,7 +67,9 @@ public class BookingDetailActivity extends BaseActivity {
         binding.vehicleName.setText(booking.getVehicle().getName());
         binding.plate.setText(booking.getVehicle().getPlate());
         binding.timeRange.setText(BookingFormatter.timeRange(booking));
-        binding.provider.setText(BookingFormatter.providerLine(this, booking));
+        String providerText = BookingFormatter.providerLine(this, booking);
+        binding.provider.setText(providerText);
+        binding.provider.setVisibility(providerText.isEmpty() ? View.GONE : View.VISIBLE);
         binding.startTrip.setEnabled(true);
     }
 

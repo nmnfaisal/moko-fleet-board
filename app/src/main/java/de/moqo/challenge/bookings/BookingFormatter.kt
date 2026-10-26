@@ -29,5 +29,5 @@ object BookingFormatter {
 
     @JvmStatic
     fun providerLine(context: Context, booking: Booking): String =
-        context.getString(R.string.detail_provided_by, booking.provider!!.name)
+        booking.provider?.let { context.getString(R.string.detail_provided_by, it.name) } ?: ""
 }
